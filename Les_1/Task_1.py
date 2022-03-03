@@ -16,7 +16,8 @@ print(f"OR: {bin(bit_or)}")
 print(f"AND: {bin(bit_and)}")
 print(f"XOR: {bin(bit_xor)}")
 
-
+c = n1 << 2
+d = n1 >> 2
 print(f"5 << 2: {bin(n1 << 2)}")
 print(f"5 >> 2: {bin(n1 >> 2)}")
 
