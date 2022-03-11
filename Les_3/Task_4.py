@@ -14,5 +14,12 @@ for number in random_array:
     else:
         numbers[number] = 1
 
+max_count = 0
+value = 0
 for number, count in numbers.items():
     print(f"{number} - {count}")
+    if count > max_count:
+        max_count = count
+        value = number
+
+print(f"Число {value}, встречается {max_count} раз")
