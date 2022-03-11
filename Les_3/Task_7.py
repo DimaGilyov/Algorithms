@@ -11,7 +11,7 @@ print(f"random_array={random_array}")
 min_1 = min_2 = random_array[0]
 for number in random_array[1:]:
     if number < min_1:
-        min_2 = min_2
+        min_2 = min_1
         min_1 = number
     elif number < min_2:
         min_2 = number
