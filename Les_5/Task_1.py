@@ -14,18 +14,16 @@ def average(numbers: list):
 companies_count = int(input("Введите количество предприятий: "))
 companies = []
 for i in range(1, companies_count + 1):
-    Company = namedtuple("Company", "name, profits, average_profit")
+    Company = namedtuple("Company", "name, average_profit")
     name = input(f"Введите имя предприятия №{i}: ")
     company_profits = []
     for j in range(1, 5):
         profit = float(input(f"Введите прибыль предприятия {name} за {j}-й квартал: "))
         company_profits.append(profit)
-    companies.append(Company(name, company_profits, average(company_profits)))
+    companies.append(Company(name, average(company_profits)))
 
 print("\n\n")
-all_profits = []
-for company in companies:
-    all_profits.extend(company.profits)
+all_profits = [company.average_profit for company in companies]
 all_companies_average_profit = average(all_profits)
 print(f"Средряя прибыль всех компаний: {all_companies_average_profit}")
 
