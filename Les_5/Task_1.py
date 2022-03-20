@@ -3,8 +3,8 @@
    Программа должна определить среднюю прибыль (за год для всех предприятий) и отдельно вывести наименования предприятий, чья
    прибыль выше среднего и ниже среднего.
 """
-import itertools
-from collections import defaultdict
+
+from collections import namedtuple
 
 
 def average(numbers: list):
@@ -12,26 +12,27 @@ def average(numbers: list):
 
 
 companies_count = int(input("Введите количество предприятий: "))
-companies = defaultdict(list)
+companies = []
 for i in range(1, companies_count + 1):
+    Company = namedtuple("Company", "name, profits, average_profit")
     name = input(f"Введите имя предприятия №{i}: ")
     company_profits = []
     for j in range(1, 5):
         profit = float(input(f"Введите прибыль предприятия {name} за {j}-й квартал: "))
-        companies[name].append(profit)
+        company_profits.append(profit)
+    companies.append(Company(name, company_profits, average(company_profits)))
 
 print("\n\n")
-all_profits = list(itertools.chain(*companies.values()))
+all_profits = []
+for company in companies:
+    all_profits.extend(company.profits)
 all_companies_average_profit = average(all_profits)
 print(f"Средряя прибыль всех компаний: {all_companies_average_profit}")
 
-report = defaultdict(list)
-for name, profits in companies.items():
-    average_profit = average(profits)
-    if average_profit > all_companies_average_profit:
-        report["Прибыль выше среднего"].append(name)
-    elif average_profit < all_companies_average_profit:
-        report["Прибыль ниже среднего"].append(name)
-
-for k, v in report.items():
-    print(k, v)
+for company in companies:
+    if company.average_profit > all_companies_average_profit:
+        print(f"Компания {company.name} имеет прибыль выше среднего ({company.average_profit})")
+    elif company.average_profit < all_companies_average_profit:
+        print(f"Компания {company.name} имеет прибыль ниже среднего ({company.average_profit})")
+    else:
+        print(f"Компания {company.name} имеет среднюю прибыль ({company.average_profit})")

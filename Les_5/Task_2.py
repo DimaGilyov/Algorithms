@@ -5,7 +5,6 @@
 """
 from collections import deque
 from collections import defaultdict
-from collections import OrderedDict
 
 hex_table = {"A": 10, "B": 11, "C": 12, "D": 13, "E": 14, "F": 15}
 
