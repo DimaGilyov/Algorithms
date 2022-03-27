@@ -26,12 +26,11 @@ def merge(left_array, right_array):
         else:
             result.append(right_array[j])
             j += 1
-    while i < len(left_array):
-        result.append(left_array[i])
-        i += 1
-    while j < len(right_array):
-        result.append(right_array[j])
-        j += 1
+            
+    if i < len(left_array):
+        result.extend(left_array[i:])
+    if j < len(right_array):
+        result.extend(right_array[j:])
     return result
 
 
