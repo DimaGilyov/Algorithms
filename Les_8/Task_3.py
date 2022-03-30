@@ -11,22 +11,22 @@ import random
 from collections import deque
 
 
-def generate_graph(n):
-    g = [[]] * n
-    v_list = [i for i in range(n)]
+def generate_graph(vertexes_count):
+    graph = [[]] * vertexes_count
+    v_list = [i for i in range(vertexes_count)]
 
-    for i in range(n):
+    for i in range(vertexes_count):
         count = 0
         while count == 0:
-            presence = [random.randint(0, 1) for i in range(n - 1)]
+            presence = [random.randint(0, 1) for i in range(vertexes_count - 1)]
             random.shuffle(presence)
             new_list = v_list.copy()
             new_list.remove(i)
             for index, element in enumerate(new_list):
                 if presence[index] == 1:
-                    g[i] = g[i] + [element]
+                    graph[i] = graph[i] + [element]
                     count += 1
-    return g
+    return graph
 
 
 def depth_first_search(graph, start, finish):
