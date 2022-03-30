@@ -7,15 +7,26 @@
    b. генерация графа выполняется в отдельной функции, которая принимает на вход число вершин.
 """
 
+import random
 from collections import deque
 
 
-def generate_graph(num):
-    new_graph = {}
-    for i in range(num):
-        new_graph[i] = tuple(j for j in range(num) if j != i)
+def generate_graph(n):
+    g = [[]] * n
+    v_list = [i for i in range(n)]
 
-    return new_graph
+    for i in range(n):
+        count = 0
+        while count == 0:
+            presence = [random.randint(0, 1) for i in range(n - 1)]
+            random.shuffle(presence)
+            new_list = v_list.copy()
+            new_list.remove(i)
+            for index, element in enumerate(new_list):
+                if presence[index] == 1:
+                    g[i] = g[i] + [element]
+                    count += 1
+    return g
 
 
 def depth_first_search(graph, start, finish):
