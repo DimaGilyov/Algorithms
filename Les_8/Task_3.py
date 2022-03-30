@@ -8,7 +8,6 @@
 """
 
 import random
-from collections import deque
 
 
 def generate_graph(vertexes_count):
