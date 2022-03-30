@@ -36,9 +36,10 @@ def depth_first_search(graph, start, finish, visited):
 
     for neighbor in graph[start]:
         if neighbor not in visited:
-            depth_first_search(graph, neighbor, finish, visited)
+            if depth_first_search(graph, neighbor, finish, visited):
+                return visited
 
-    return visited
+    return []
 
 
 n = int(input("Количество вершин в графе: "))
