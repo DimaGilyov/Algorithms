@@ -29,17 +29,15 @@ def generate_graph(vertexes_count):
     return graph
 
 
-def depth_first_search(graph, start, finish, visited=None):
-    if visited is None:
-        visited = []
+def depth_first_search(graph, start, finish, visited):
     visited.append(start)
 
     if start == finish:
         return visited
 
-    for next_element in graph[start]:
-        if next_element not in visited:
-            depth_first_search(graph, next_element, finish, visited)
+    for neighbor in graph[start]:
+        if neighbor not in visited:
+            depth_first_search(graph, neighbor, finish, visited)
 
     return visited
 
@@ -51,5 +49,5 @@ for i, v in enumerate(graph):
 
 start = int(input("Введите вершину начала: "))
 finish = int(input("Введите вершину конца: "))
-way = depth_first_search(graph, start, finish)
+way = depth_first_search(graph, start, finish, [])
 print(f"way: {way}")
