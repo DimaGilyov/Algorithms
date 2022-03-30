@@ -29,46 +29,25 @@ def generate_graph(vertexes_count):
     return graph
 
 
-def depth_first_search(graph, start, finish):
-    length = len(graph)
-    parent = [None] * length
-    is_visited = [False] * length
+def depth_first_search(graph, start, finish, visited=None):
+    if visited is None:
+        visited = []
+    visited.append(start)
 
-    deq = deque([start])
-    is_visited[start] = True
+    if start == finish:
+        return visited
 
-    while len(deq) > 0:
-        current = deq.pop()
+    for next_element in graph[start]:
+        if next_element not in visited:
+            depth_first_search(graph, next_element, finish, visited)
 
-        if current == finish:
-            break
-
-        for vertex in graph[current]:
-            if not is_visited[vertex]:
-                is_visited[vertex] = True
-                parent[vertex] = current
-                deq.appendleft(vertex)
-    else:
-        return f"Из вершины {start} невозможно попасть в вершину {finish}"
-
-    cost = 0
-    way = deque([finish])
-    i = finish
-
-    while parent[i] != start:
-        cost += 1
-        way.appendleft(parent[i])
-        i = parent[i]
-
-    cost += 1
-    way.appendleft(start)
-
-    return list(way)
+    return visited
 
 
 n = int(input("Количество вершин в графе: "))
 graph = generate_graph(n)
-print(*graph, end="\n")
+for i, v in enumerate(graph):
+    print(f"{i}) {v}")
 
 start = int(input("Введите вершину начала: "))
 finish = int(input("Введите вершину конца: "))
