@@ -14,10 +14,10 @@ def get_substrings_count(string: str) -> int:
     substrings = []
     for i in range(0, len(string)):
         for j in range(i, len(string)):
-            if i == 0 and j == len(string) - 1:
+            substring = string[i: j + 1]
+            if (i == 0 and j == len(string) - 1) or len(substring.strip()) == 0:
                 continue
 
-            substring = string[i: j + 1]
             hash = get_hash1(substring)
             if hash not in substrings:
                 substrings.append(hash)
