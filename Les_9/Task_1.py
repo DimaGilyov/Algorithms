@@ -18,18 +18,10 @@ def get_substrings_count(string: str) -> int:
             if (i == 0 and j == len(string) - 1) or len(substring.strip()) == 0:
                 continue
 
-            hash = get_hash1(substring)
+            hash = hashlib.sha1(substring.encode("UTF-8")).hexdigest()
             if hash not in substrings:
                 substrings.append(hash)
     return len(substrings)
-
-
-def get_hash1(text: str):
-    h_list = [None]
-
-
-def get_hash1(text: str):
-    return hashlib.sha1(text.encode("UTF-8")).hexdigest()
 
 
 if __name__ == "__main__":
